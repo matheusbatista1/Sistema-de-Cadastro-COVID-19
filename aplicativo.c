@@ -727,7 +727,10 @@ int bissexto(ano){
     }
 }
 int validarData(int dia,int mes,int ano){
-    int contaDigitosDia = 0, contaDigitosMes = 0, contaDigitosAno = 0, valorDia, valorMes, valorAno;
+    int contaDigitosDia = 0, contaDigitosMes = 0, contaDigitosAno = 0, valorDia, valorMes, valorAno, anoAtual;
+    time(&segundos);
+    dataAtual = localtime(&segundos);
+    anoAtual = dataAtual->tm_year + 1900;
     valorDia = dia;
     valorMes = mes;
     valorAno = ano;
@@ -755,7 +758,7 @@ int validarData(int dia,int mes,int ano){
     if(mes == 2 && dia > 29){
         return 0;
     }
-    if(ano < 1900){
+    if(ano < 1900 || ano > anoAtual){
         return 0;
     }
     if(mes == 2 && dia == 29 && bissexto(ano) == 0){
